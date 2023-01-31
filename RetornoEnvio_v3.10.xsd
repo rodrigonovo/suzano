@@ -5,7 +5,7 @@
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/retorno"  
            xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos">
-    <xs:import schemaLocation="TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
+    <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
     <xs:element name="RetornoEnvio" type="xi:TRetornoEnvio"/>
     <xs:complexType name="TRetornoEnvio">
         <xs:sequence>

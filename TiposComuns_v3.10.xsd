@@ -6,7 +6,7 @@
             xmlns:xc="http://xmlns.mrs.com.br/iti/tipos/comuns"
             attributeFormDefault="unqualified" 
             elementFormDefault="qualified">
-  <xs:import schemaLocation="TiposBasico_v3.10.xsd"
+  <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd"
              namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
   <xs:complexType name="TPrefixoTrem">
     <xs:sequence>

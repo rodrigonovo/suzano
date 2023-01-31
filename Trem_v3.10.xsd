@@ -9,13 +9,13 @@
            xmlns:xeq="http://xmlns.mrs.com.br/iti/tipos/equipagem"
            attributeFormDefault="unqualified" 
            elementFormDefault="qualified" >
-  <xs:import schemaLocation="TiposBasico_v3.10.xsd"
+  <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd"
              namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
-  <xs:import schemaLocation="TiposComuns_v3.10.xsd"
+  <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposComuns_v3.10.xsd"
              namespace="http://xmlns.mrs.com.br/iti/tipos/comuns"/>
-  <xs:import schemaLocation="DocumentoFiscal_v3.10.xsd"
+  <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/DocumentoFiscal_v3.10.xsd"
              namespace="http://xmlns.mrs.com.br/iti/tipos/docFiscal"/>
-  <xs:import schemaLocation="Equipagem_v3.10.xsd"
+  <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/Equipagem_v3.10.xsd"
              namespace="http://xmlns.mrs.com.br/iti/tipos/equipagem"/>
   <xs:complexType name="TTrem">
     <xs:sequence>
