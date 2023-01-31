@@ -1,0 +1,59 @@
+<xs:schema targetNamespace="http://xmlns.mrs.com.br/iti/tipos/equipagem" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           xmlns="http://xmlns.mrs.com.br/iti/tipos/equipagem" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/equipagem">
+    <xs:complexType name="TEquipagem">
+        <xs:sequence>
+            <xs:element name="dataHoraInicioAtividade" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de início da atividade da equipagem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataHoraTerminoAtividade" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>
+                        Data de término da atividade da equipagem
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="matricula">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:maxLength value="16"/>
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="atividade" type="TTipoAtividadeEquipagem"
+                        minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="TTipoAtividadeEquipagem">
+        <xs:annotation>
+            <xs:documentation>Descreve a atividade da equipagem no trem. Ex: Maquinista do Trem (TRE),
+    Auxilio no Trem (AUX), Lastro (LAS) , Prontidão(PRO), etc.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ABA"/>
+            <xs:enumeration value="AGC"/>
+            <xs:enumeration value="AUS"/>
+            <xs:enumeration value="AUX"/>
+            <xs:enumeration value="DES"/>
+            <xs:enumeration value="DVD"/>
+            <xs:enumeration value="FEC"/>
+            <xs:enumeration value="INI"/>
+            <xs:enumeration value="LAS"/>
+            <xs:enumeration value="MAN"/>
+            <xs:enumeration value="OPE"/>
+            <xs:enumeration value="PAS"/>
+            <xs:enumeration value="PRO"/>
+            <xs:enumeration value="PST"/>
+            <xs:enumeration value="TRE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

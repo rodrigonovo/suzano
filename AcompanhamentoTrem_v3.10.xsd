@@ -1,0 +1,57 @@
+<xs:schema xmlns="http://xmlns.mrs.com.br/iti/acompanhamento" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://xmlns.mrs.com.br/iti/tipos/acompanhamento" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/acompanhamento"
+           xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos"
+           xmlns:xt="http://xmlns.mrs.com.br/iti/tipos/trem">
+    <xs:import schemaLocation="Trem_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/trem"> </xs:import>
+    <xs:import schemaLocation="TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"> </xs:import>
+    <xs:element name="AcompanhamentoTrem" type="xi:TAcompanhamentoTrem"/>
+     <xs:complexType name="TAcompanhamentoTrem">
+        <xs:annotation>
+            <xs:documentation>A sample element</xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="numeroEnvio" type="xs:positiveInteger"/>
+            <xs:element name="dataHoraEnvio" type="xs:dateTime"/>
+            <xs:element name="CNPJFerrovia" type="xb:TCnpj" maxOccurs="1"
+                        minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número CNPJ da ferrovia responsável pela geração da
+                        informação
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJDestinatario" type="xb:TCnpj" maxOccurs="1"
+                        minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Número CNPJ do destinatário da mensagem, podendo ser:
+                        Ferrovia, Cliente, Parceiro, etc.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="nomeProcessoEnvio" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identificador do processo gerador do envio. Informação
+                        opcional que informa qual o sistema (processo) fez a
+                        emisão da mensagem.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="8"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Trem" type="xt:TTrem"/>
+            <!-- mensagem de erro -->
+        </xs:sequence>
+        <xs:attribute name="versao" type="xb:TVersao" use="required"/>
+    </xs:complexType>
+</xs:schema>

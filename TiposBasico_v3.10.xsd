@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.1.6.1440 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/basicos" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://xmlns.mrs.com.br/iti/tipos/basicos"
+           xmlns="http://xmlns.mrs.com.br/iti/tipos/basicos"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="TCodUfIBGE">
+    <xs:annotation>
+      <xs:documentation>Tipo Codigo da UF da tabela do IBGE</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:enumeration value="11" />
+      <xs:enumeration value="12" />
+      <xs:enumeration value="13" />
+      <xs:enumeration value="14" />
+      <xs:enumeration value="15" />
+      <xs:enumeration value="16" />
+      <xs:enumeration value="17" />
+      <xs:enumeration value="21" />
+      <xs:enumeration value="22" />
+      <xs:enumeration value="23" />
+      <xs:enumeration value="24" />
+      <xs:enumeration value="25" />
+      <xs:enumeration value="26" />
+      <xs:enumeration value="27" />
+      <xs:enumeration value="28" />
+      <xs:enumeration value="29" />
+      <xs:enumeration value="31" />
+      <xs:enumeration value="32" />
+      <xs:enumeration value="33" />
+      <xs:enumeration value="35" />
+      <xs:enumeration value="41" />
+      <xs:enumeration value="42" />
+      <xs:enumeration value="43" />
+      <xs:enumeration value="50" />
+      <xs:enumeration value="51" />
+      <xs:enumeration value="52" />
+      <xs:enumeration value="53" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCodMunIBGE">
+    <xs:annotation>
+      <xs:documentation>Tipo Codigo do Municipio da tabela do IBGE</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{7}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TChDocFiscalEletronico">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Chave da Nota Fiscal Eletronica ou do CT-e.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{44}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCnpj">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do CNPJ</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{14}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCnpjVar">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do CNPJ tamanho variavel (3-14)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{3,14}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCnpjOpc">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do CNPJ Opcional</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{0}|[0-9]{14}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCpf">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do CPF</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{11}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCpfVar">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do CPF de tamanho variavel (3-11)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{3,11}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0302">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 5 digitos, sendo 3 de corpo e 2 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{2}|[1-9]{1}[0-9]{0,2}(\.[0-9]{2})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0302Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 5 digitos, sendo 3 de corpo e 2 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[0-9]{1}[1-9]{1}|0\.[1-9]{1}[0-9]{1}|[1-9]{1}[0-9]{0,2}(\.[0-9]{2})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0803">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 11 digitos, sendo 8 de corpo e 3 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{3}|[1-9]{1}[0-9]{0,7}(\.[0-9]{3})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0803Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 11 digitos, sendo 8 de corpo e 3 decimais utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[1-9]{1}[0-9]{2}|0\.[0-9]{2}[1-9]{1}|0\.[0-9]{1}[1-9]{1}[0-9]{1}|[1-9]{1}[0-9]{0,7}(\.[0-9]{3})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0804">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 12 digitos, sendo 8 de corpo e 4 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{4}|[1-9]{1}[0-9]{0,7}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0804Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 12 digitos, sendo 8 de corpo e 4 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[1-9]{1}[0-9]{3}|0\.[0-9]{3}[1-9]{1}|0\.[0-9]{2}[1-9]{1}[0-9]{1}|0\.[0-9]{1}[1-9]{1}[0-9]{2}|[1-9]{1}[0-9]{0,7}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1104">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 11 de corpo e 4 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{4}|[1-9]{1}[0-9]{0,10}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1104Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 11 de corpo e 4 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[1-9]{1}[0-9]{3}|0\.[0-9]{3}[1-9]{1}|0\.[0-9]{2}[1-9]{1}[0-9]{1}|0\.[0-9]{1}[1-9]{1}[0-9]{2}|[1-9]{1}[0-9]{0,10}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1203">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 12 de corpo e 3 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{3}|[1-9]{1}[0-9]{0,11}(\.[0-9]{3})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1203Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 12 de corpo e 3 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[1-9]{1}[0-9]{2}|0\.[0-9]{2}[1-9]{1}|0\.[0-9]{1}[1-9]{1}[0-9]{1}|[1-9]{1}[0-9]{0,11}(\.[0-9]{3})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1204">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 16 digitos, sendo 12 de corpo e 4 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{4}|[1-9]{1}[0-9]{0,11}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1204Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 16 digitos, sendo 12 de corpo e 4 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[1-9]{1}[0-9]{3}|0\.[0-9]{3}[1-9]{1}|0\.[0-9]{2}[1-9]{1}[0-9]{1}|0\.[0-9]{1}[1-9]{1}[0-9]{2}|[1-9]{1}[0-9]{0,11}(\.[0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1302">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 13 de corpo e 2 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{2}|[1-9]{1}[0-9]{0,12}(\.[0-9]{2})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1302Opc">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 15 digitos, sendo 13 de corpo e 2 decimais, utilizado em tags opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0\.[0-9]{1}[1-9]{1}|0\.[1-9]{1}[0-9]{1}|[1-9]{1}[0-9]{0,12}(\.[0-9]{2})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_1110">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 21 digitos, sendo 11 de corpo e 2 a 10 decimais, utilizado no valor unitario</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{2,10}|[1-9]{1}[0-9]{0,10}(\.[0-9]{2,10})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TIeDest">
+    <xs:annotation>
+      <xs:documentation>Tipo Inscricao Estadual do Destinatario</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{0,14}|ISENTO|PR[0-9]{4,8}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TIe">
+    <xs:annotation>
+      <xs:documentation>Tipo Inscricao Estadual do Emitente</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{2,14}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TModCT">
+    <xs:annotation>
+      <xs:documentation>Tipo Modelo Documento CT-e</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:enumeration value="57" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TNF">
+    <xs:annotation>
+      <xs:documentation>Tipo Numero do Documento Fiscal</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[1-9]{1}[0-9]{0,8}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TSerie">
+    <xs:annotation>
+      <xs:documentation>Tipo Serie do Documento Fiscal</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|[1-9]{1}[0-9]{0,2}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TUf">
+    <xs:annotation>
+      <xs:documentation>Tipo Sigla da UF</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:enumeration value="AC" />
+      <xs:enumeration value="AL" />
+      <xs:enumeration value="AM" />
+      <xs:enumeration value="AP" />
+      <xs:enumeration value="BA" />
+      <xs:enumeration value="CE" />
+      <xs:enumeration value="DF" />
+      <xs:enumeration value="ES" />
+      <xs:enumeration value="GO" />
+      <xs:enumeration value="MA" />
+      <xs:enumeration value="MG" />
+      <xs:enumeration value="MS" />
+      <xs:enumeration value="MT" />
+      <xs:enumeration value="PA" />
+      <xs:enumeration value="PB" />
+      <xs:enumeration value="PE" />
+      <xs:enumeration value="PI" />
+      <xs:enumeration value="PR" />
+      <xs:enumeration value="RJ" />
+      <xs:enumeration value="RN" />
+      <xs:enumeration value="RO" />
+      <xs:enumeration value="RR" />
+      <xs:enumeration value="RS" />
+      <xs:enumeration value="SC" />
+      <xs:enumeration value="SE" />
+      <xs:enumeration value="SP" />
+      <xs:enumeration value="TO" />
+      <xs:enumeration value="EX" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TAmb">
+    <xs:annotation>
+      <xs:documentation>Tipo Ambiente</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Tano">
+    <xs:annotation>
+      <xs:documentation>Tipo ano</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{2}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TMed">
+    <xs:annotation>
+      <xs:documentation>Tipo temp medio em segundos</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[0-9]{1,4}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TString">
+    <xs:annotation>
+      <xs:documentation>Tipo string generico</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="[!-ÿ]{1}[ -ÿ]{0,}[!-ÿ]{1}|[!-ÿ]{1}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TData">
+    <xs:annotation>
+      <xs:documentation>Tipo data AAAA-MM-DD</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="(((20(([02468][048])|([13579][26]))-02-29))|(20[0-9][0-9])-((((0[1-9])|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TId">
+     <xs:restriction base="TString">
+            <xs:minLength value="1" />
+            <xs:maxLength value="16" />
+	</xs:restriction>	
+  </xs:simpleType>
+  <xs:simpleType name="TVersao">
+    <xs:annotation>
+      <xs:documentation>Tipo Versao - 3.00</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="3\.10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0502">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 5 digitos, sendo 3 de corpo e 2 decimais, utilizado em tags
+    opcionais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{4}|[1-9]{1}[0-9]{0,4}(\.[0-9]{2})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDec_0603">
+    <xs:annotation>
+      <xs:documentation>Tipo Decimal com 11 digitos, sendo 8 de corpo e 3 decimais</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve" />
+      <xs:pattern value="0|0\.[0-9]{3}|[1-9]{1}[0-9]{0,5}(\.[0-9]{3})?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TCfop">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo CFOP
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+      <xs:pattern value="[123567][0-9]([0-9][1-9]|[1-9][0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TEndereco">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Dados do Endereco
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="xLgr">
+        <xs:annotation>
+          <xs:documentation>
+            Logradouro
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="nro">
+        <xs:annotation>
+          <xs:documentation>
+            Numero
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xCpl" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Complemento
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xBairro" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Bairro
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="cMun" type="xi:TCodMunIBGE">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo do municipio (utilizar a tabela do IBGE), informar 9999999
+            para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMun">
+        <xs:annotation>
+          <xs:documentation>
+            Nome do municipio, informar EXTERIOR para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="CEP" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            CEP
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="UF" type="xi:TUf">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla da UF, informar EX para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cPais" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo do pais
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{1,4}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xPais" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Nome do pais
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TEndReEnt">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Dados do Local de Retirada ou Entrega
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="CNPJ" type="xi:TCnpj">
+          <xs:annotation>
+            <xs:documentation>
+              Numero do CNPJ
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CPF" type="xi:TCpf">
+          <xs:annotation>
+            <xs:documentation>
+              Numero do CPF
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="xNome">
+        <xs:annotation>
+          <xs:documentation>
+            Razao Social ou Nome
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:maxLength value="60"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xLgr">
+        <xs:annotation>
+          <xs:documentation>
+            Logradouro
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:maxLength value="255"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="nro">
+        <xs:annotation>
+          <xs:documentation>
+            Numero
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:maxLength value="60"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xCpl" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Complemento
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:maxLength value="60"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xBairro">
+        <xs:annotation>
+          <xs:documentation>
+            Bairro
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:maxLength value="60"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="cMun" type="xi:TCodMunIBGE">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo do municipio (utilizar a tabela do IBGE), informar 9999999
+            para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMun">
+        <xs:annotation>
+          <xs:documentation>
+            Nome do municipio, , informar EXTERIOR para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="UF" type="xi:TUf">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla da UF,informar EX para operacoes com o exterior.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

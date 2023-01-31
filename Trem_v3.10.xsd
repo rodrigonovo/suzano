@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/trem" 
+           xmlns="http://xmlns.mrs.com.br/iti/tipos/trem" 
+           targetNamespace="http://xmlns.mrs.com.br/iti/tipos/trem" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos"
+           xmlns:xc="http://xmlns.mrs.com.br/iti/tipos/comuns"
+           xmlns:xd="http://xmlns.mrs.com.br/iti/tipos/docFiscal"
+           xmlns:xeq="http://xmlns.mrs.com.br/iti/tipos/equipagem"
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" >
+  <xs:import schemaLocation="TiposBasico_v3.10.xsd"
+             namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
+  <xs:import schemaLocation="TiposComuns_v3.10.xsd"
+             namespace="http://xmlns.mrs.com.br/iti/tipos/comuns"/>
+  <xs:import schemaLocation="DocumentoFiscal_v3.10.xsd"
+             namespace="http://xmlns.mrs.com.br/iti/tipos/docFiscal"/>
+  <xs:import schemaLocation="Equipagem_v3.10.xsd"
+             namespace="http://xmlns.mrs.com.br/iti/tipos/equipagem"/>
+  <xs:complexType name="TTrem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CNPJFerroviaTrem"
+                  type="xb:TCnpj">
+        <xs:annotation>
+          <xs:documentation>Número do CNPJ</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="siglaPatioOrigem" type="xc:TSiglaPatio" />
+      <xs:element name="siglaPatioDestino" type="xc:TSiglaPatio" />
+      <xs:element name="PrefixoTrem" type="xc:TPrefixoTrem" />
+      <xs:element minOccurs="0" name="FamiliaTrem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="codigoFamilia">
+              <xs:annotation>
+                <xs:documentation>Identificação do trem.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:token">
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="4" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="sentido" type="xs:byte" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="estadoTrem" type="TEstadoTrem">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PatioItinerarioAtual">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="siglaPatio" type="xc:TSiglaPatio" />
+            <xs:element name="eventoCirculacao" type="TEventoCirculacao" />
+            <xs:element name="dataHoraCirculacao" type="xs:dateTime" />
+          </xs:sequence>
+          <xs:attribute name="sequencia" type="xs:positiveInteger" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="patiosTranspostos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="PatioItinerario">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="siglaPatio" type="xc:TSiglaPatio" />
+                </xs:sequence>
+                <xs:attribute name="sequencia" type="xs:positiveInteger" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="composicao">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="vagoes" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="Vagao"
+                              type="xc:TVagaoTrem"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="locomotivas">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="Locomotiva"
+                              type="xc:TLocomotivaTrem"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="documentosFiscais">
+        <xs:annotation>
+          <xs:documentation>
+            Lista com todas os documentos fiscais (se NF ou outros, dados
+            completos) do carregamento - seja para o carregamento, vagao ou item
+            carga.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DocumentoFiscal"
+                        type="xd:TDocumentoFiscal">
+              <xs:annotation>
+                <xs:documentation>
+                  Documento Fiscal com todas as informacoes.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentosTransporte" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Documentos de Transporte Anterior
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DocumentoTransporte"
+                        type="xd:TDocumentoTransporte"
+                        maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentosTransporteAnterior" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Documentos de Transporte Anterior
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DocumentoTransporteAnterior"
+                        type="xd:TDocumentoTransporteAnterior"
+                        maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="equipagens">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="Equipagem"
+                        type="xeq:TEquipagem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dataHoraSaidaOrigem" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Horário em que o trem partiu do pátio de sua origem em direção ao destino</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dataHoraPrevisaoChegadaDestino" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Horário previsto para chegada do trem no pátio ferroviário de seu destino</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="movimentacaoRealizada">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="refVagao">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="tipoMovimentacao" type="TTipoMovimentacao" />
+                  <xs:element name="dataHoraMovimentacao" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="observacao" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>
+                                                observações relevantes 
+                                            </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="idVagao" type="xb:TId" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itensCarga" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ItemCarga" type="xc:TCargaExpedicao" minOccurs="1"
+                        maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="observacao" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            observações relevantes sobre o trem
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="tabela" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Tabela de Minério associada a composição do trem.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="identificadorTrem" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Código identificador único do trem fornecido pela ferrovia
+            proprietária do trem
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OtherXML" type="xs:anyType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Informações Complementares. Pré-requisito para utilização:
+            Alinhamento entre as ferrovias.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TEventoCirculacao">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CHEGADA_PATIO" />
+      <xs:enumeration value="SAIDA_PATIO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TEstadoTrem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EM_CIRCULACAO" />
+      <xs:enumeration value="ENCERRADO" />
+      <xs:enumeration value="SUPRIMIDO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TTipoMovimentacao">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RETIRADA" />
+      <xs:enumeration value="ANEXACAO" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

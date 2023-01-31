@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://xmlns.mrs.com.br/iti/tipos/comuns"
+            xmlns="http://xmlns.mrs.com.br/iti/tipos/comuns"
+            xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos"
+            xmlns:xc="http://xmlns.mrs.com.br/iti/tipos/comuns"
+            attributeFormDefault="unqualified" 
+            elementFormDefault="qualified">
+  <xs:import schemaLocation="TiposBasico_v3.10.xsd"
+             namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
+  <xs:complexType name="TPrefixoTrem">
+    <xs:sequence>
+      <xs:element name="codigoPrefixoTrem">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo de identificacao do trem.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="7"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="dataHoraInicioValidadePrefixo" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>
+            Data base que sera considerada para formacao do codigo do prefixo do
+            trem. OBS.: O prefixo do trem pode repetir para outra data base.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TSiglaPatio">
+    <xs:annotation>
+      <xs:documentation>
+        Os patios e estacoes ferroviarias sao identificados por siglas formadas
+        com tres letras maiusculas. Ex.: FVR, ZPG, IPG, etc.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z,0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TSiglaTerminal">
+    <xs:annotation>
+      <xs:documentation>
+        Os terminais sao identificados por siglas formadas com tres letras
+        maiusculas.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z,0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TTamanhoCNT">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="20"/>
+      <xs:enumeration value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TContainer">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Numero do Container
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="20"/>
+      <xs:whiteSpace value="preserve"/>
+      <xs:pattern value="[A-Z0-9]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TLotacao">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VAZIO"/>
+      <xs:enumeration value="CARREGADO"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TIndicadorProprietarioLona">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SEM_LONA"/>
+      <xs:enumeration value="LONA_TRANSPORTADORA"/>
+      <xs:enumeration value="LONA_CLIENTE"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TIdentificadorVagao">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{7}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TVagao">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="tipoVagao">
+        <xs:annotation>
+          <xs:documentation>
+            Sera informado com a tipo(serie) do vagao, que sera definida por uma
+            sigla alfanumerica de tres posicoes, como por exemplo 'PES', 'PDS'
+            ou 'GDT'. A serie esta diretamente relacionada ao tipo e capacidade
+            dos vagoes.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:length value="3"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="identificador" type="xc:TIdentificadorVagao"/>
+      <xs:element name="tara" type="xb:TDec_0502">
+        <xs:annotation>
+          <xs:documentation>
+            peso em toneladas do vagao vazio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="capacidadeNominal" type="xb:TDec_0603">
+        <xs:annotation>
+          <xs:documentation>
+            capacidade de carga do vagao em toneladas.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="CNPJProprietario"
+                  type="xb:TCnpj">
+        <xs:annotation>
+          <xs:documentation>
+            Numero do CNPJ do proprietario do vagao
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="etiquetaRFID" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Informação da etiqueta eletrônica RFID  do veículo. Utilizada para
+            identificação dinamica através de leitores eletrônicos de RFID
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:length value="24"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="dataUltimaAtualizacao" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Data da última atualização dos dados cadastrais do veículo na
+            ferrovia operadora
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="operadora">
+        <xs:annotation>
+          <xs:documentation>
+            Código da ferrovia operadora do vagão
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:length value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="IdVagao" type="xb:TId"/>
+  </xs:complexType>
+  <xs:complexType name="TVagaoTrem">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="DadosCadastrais"
+                  type="xc:TVagao"/>
+      <xs:element minOccurs="1" name="posicao" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>
+            Quantidade de unidade de carga
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="lotacao" type="xc:TLotacao"/>
+      <xs:element name="siglaPatioDestino" type="xc:TSiglaPatio"/>
+      <xs:element name="siglaPatioOrigem" type="xc:TSiglaPatio"/>
+      <xs:element minOccurs="0" name="docsFiscaisVagao" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded"
+                        name="refDocFiscal">
+              <xs:complexType>
+                <xs:attribute name="idDocFiscal" type="xb:TId" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="docsTransporte" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Documentos de Transporte
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded"
+                        name="refDocTransporte">
+              <xs:complexType>
+                <xs:attribute name="idDocTransporte" use="required"
+                              type="xb:TString"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="quantidadeCarga"
+                  type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>
+            Quantidade de unidade de carga
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="itensCarga" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="refItemCarga">
+              <xs:complexType>
+                <xs:attribute name="idItemCarga" use="required"
+                              type="xb:TString"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="pesoVagaoToneladaBruta" type="xb:TDec_0603">
+        <xs:annotation>
+          <xs:documentation>
+            Peso bruto do vagao na unidade de toneladas
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="pesoCargaTonelada" type="xb:TDec_0603">
+        <xs:annotation>
+          <xs:documentation>
+            Valor do peso da mercadoria embarcada no vagao carregado, na unidade
+            de toneladas
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="indicadorProprietarioLona"
+                  type="xc:TIndicadorProprietarioLona"/>
+      <xs:element name="numeroLona" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Numero da lona usada no vagao
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codigoVagaoRefCliente" minOccurs="0" nillable="false">
+        <xs:annotation>
+          <xs:documentation>
+            Consiste em um codigo definido pelo proprio cliente e unico para
+            cada vagao do carregamento. OBS: - Este codigo sera devolvido ao
+            proprio cliente no padrao "AcompanhamentoTrem" para utilizacao nos
+            processos do cliente. Ex: Tipo/qualidade de minerio da mina; - Nao
+            existe regra definida para a formacao deste codigo.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="IdVagao" type="xb:TId"/>
+  </xs:complexType>
+  <xs:complexType name="TVagaoCarregado">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="Identificador"
+                  type="xc:TIdentificadorVagao"/>
+      <xs:element minOccurs="1" name="docsFiscaisVagao">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded"
+                        name="refDocFiscal">
+              <xs:complexType>
+                <xs:attribute name="idDocFiscal" type="xb:TId" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="docsTransporte" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Documentos de Transporte Anterior
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded"
+                        name="refDocTransporte">
+              <xs:complexType>
+                <xs:attribute name="idDocTransporte" use="required"
+                              type="xb:TString"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="quantidadeCarga"
+                  type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>
+            Quantidade de unidade de carga
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="itensCarga" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="refItemCarga">
+              <xs:complexType>
+                <xs:attribute name="idItemCarga" use="required"
+                              type="xb:TString"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="pesoVagaoToneladaBruta" type="xb:TDec_0603">
+        <xs:annotation>
+          <xs:documentation>
+            Peso bruto do vagao na unidade de toneladas
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="pesoCargaTonelada" type="xb:TDec_0603">
+        <xs:annotation>
+          <xs:documentation>
+            Valor do peso da mercadoria embarcada no vagao carregado, na unidade
+            de toneladas
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="indicadorProprietarioLona"
+                  type="xc:TIndicadorProprietarioLona"/>
+      <xs:element name="numeroLona" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Numero da lona usada no vagao
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codigoVagaoRefCliente" minOccurs="0" nillable="false">
+        <xs:annotation>
+          <xs:documentation>
+            Consiste em um codigo definido pelo proprio cliente e unico para
+            cada vagao do carregamento. OBS: - Este codigo sera devolvido ao
+            proprio cliente no padrao "AcompanhamentoTrem" para utilizacao nos
+            processos do cliente. Ex: Tipo/qualidade de minerio da mina; - Nao
+            existe regra definida para a formacao deste codigo.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TCargaExpedicao">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="numeroContainer" type="TContainer">
+          <xs:annotation>
+            <xs:documentation>
+              Identificacao do Container
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="identificadorCarga">
+          <xs:annotation>
+            <xs:documentation>
+              Identificacao caso a carga nao seja container. ex: Bloco de Pedra,
+              Placa (do licenciamento do veiculo), Chassis para veiculos e
+              trailers, Outros itens.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xb:TString">
+              <xs:minLength value="1"/>
+              <xs:maxLength value="20"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:choice>
+      <xs:element minOccurs="0" name="tamanhoContainer" type="TTamanhoCNT"/>
+      <xs:element minOccurs="0" name="docsFiscaisCarga">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded"
+                        name="refDocFiscalCliente">
+              <xs:complexType>
+                <xs:attribute name="idDocFiscal" type="xb:TId" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="lacres">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="nLacre">
+              <xs:annotation>
+                <xs:documentation>
+                  numero do lacre
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xb:TString">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="20"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="idItemCarga" use="required" type="xb:TString"/>
+  </xs:complexType>
+  <xs:simpleType name="TSentidoLocomotiva">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FRENTE"/>
+      <xs:enumeration value="RE"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TFuncaoLocomotiva">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TRACIONANDO"/>
+      <xs:enumeration value="REBOCADA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TIdentificadorLocomotiva">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{5}[0-9]{0,2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TLocomotiva">
+    <xs:sequence>
+      <xs:element name="identificador">
+        <xs:annotation>
+          <xs:documentation>
+            Numero de Identificacao da locomotiva
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{5}[0-9]{0,2}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="pesoBruto" type="xb:TDec_0502">
+        <xs:annotation>
+          <xs:documentation>
+            peso em toneladas da locomotiva vazia.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="CNPJProprietario"
+                  type="xb:TCnpj">
+        <xs:annotation>
+          <xs:documentation>
+            Numero do CNPJ do proprietario da locomotiva
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="etiquetaRFID" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Informação da etiqueta eletrônica RFID  do veículo. Utilizada para
+            identificação dinamica através de leitores eletrônicos de RFID
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:length value="24"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="dataUltimaAtualizacao" type="xs:dateTime" minOccurs="0"
+                  maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Data da última atualização dos dados cadastrais do veículo na
+            ferrovia operadora
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="operadora">
+        <xs:annotation>
+          <xs:documentation>
+            Código da ferrovia operadora da locomotiva
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:length value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="IdLocomotiva" type="xb:TId"/>
+  </xs:complexType>
+  <xs:complexType name="TLocomotivaTrem">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="DadosCadastrais"
+                  type="xc:TLocomotiva">
+        <xs:annotation>
+          <xs:documentation>
+            Numero do CNPJ do proprietario da locomotiva
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="posicao" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>
+            Quantidade de unidade de carga
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="funcao" type="xc:TFuncaoLocomotiva"/>
+      <xs:element name="sentido" type="xc:TSentidoLocomotiva"/>
+    </xs:sequence>
+    <xs:attribute name="IdLocomotiva" type="xb:TId"/>
+  </xs:complexType>
+  <xs:complexType name="TMercadoria">
+    <xs:sequence>
+      <xs:element name="descricaoResumida">
+        <xs:annotation>
+          <xs:documentation>
+            Devera conter a descricao da mercadoria transportada pela ferrovia.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="NCMPredominante" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Codigo predominante NCM (8 posicoes) nos itens do documento fiscal
+              (produtos)
+            </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:whiteSpace value="preserve"/>
+              <xs:pattern value="[0-9]{8}"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="CodigoItemCarga" minOccurs="1"
+                    type="xc:TCodigoItemCarga">
+          <xs:annotation>
+            <xs:documentation>
+              Descricao da mercadoria do ponto de vista da ferrovia.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="descricaoDetalhada">
+        <xs:annotation>
+          <xs:documentation>
+            Devera conter a descricao detalhada da mercadoria do item do
+            documento fiscal. A descricao detalhada da mercadoria contem
+            caracteristicas especiais da mercadoria
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="codigo">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo da mercadoria transportada pela ferrovia. Cabe ao cliente ser
+            informado previamente pela ferrovia dos codigos das mercadorias a
+            serem transportadas. Para facilitar a geracao dos documentos
+            eletronicos, os codigos poderao estar disponiveis para download dos
+            clientes pela Internet.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TRotaFerroviaria">
+    <xs:sequence>
+      <xs:element name="siglaPatioOrigem" type="xc:TSiglaPatio">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla do patio origem do transporte
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="siglaTerminalOrigem"
+                  type="xc:TSiglaTerminal">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla do terminal de origem do transporte
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="siglaPatioDestino" type="xc:TSiglaPatio">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla do patio de destino do transporte
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="siglaTerminalDestino"
+                  type="xc:TSiglaTerminal">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla do terminal de destino do transporte
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="siglaPatioIntercambioOrigem"
+                  type="xc:TSiglaPatio">
+        <xs:annotation>
+          <xs:documentation>
+            Patio de intercambio entre duas ferrovias. Informado somente no caso
+            de arquivo recebido de outras ferrovias em operacao de intercambio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="siglaPatioIntercambioDestino"
+                  type="xc:TSiglaPatio">
+        <xs:annotation>
+          <xs:documentation>
+            Patio de destino sera o de intercambio entre duas ferrovias e nao o de
+            destino da carga.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TCliente">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="CNPJ" type="xb:TCnpj">
+          <xs:annotation>
+            <xs:documentation>
+              Numero do CNPJ
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CPF" type="xb:TCpf">
+          <xs:annotation>
+            <xs:documentation>
+              Numero do CPF
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="IE">
+        <xs:annotation>
+          <xs:documentation>
+            Inscricao Estadual
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TIeDest"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xNome">
+        <xs:annotation>
+          <xs:documentation>
+            Razao Social ou Nome do emitente
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="xFant" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Razao Social ou Nome do emitente
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="endereco" type="xb:TEndereco">
+        <xs:annotation>
+          <xs:documentation>
+            Endereco do emitente
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TLocal">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Dados do Local de Origem ou Destino
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="cMun" type="xb:TCodMunIBGE">
+        <xs:annotation>
+          <xs:documentation>
+            Codigo do municipio (utilizar a tabela do IBGE)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMun">
+        <xs:annotation>
+          <xs:documentation>
+            Nome do municipio
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xb:TString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="UF" type="xb:TUf">
+        <xs:annotation>
+          <xs:documentation>
+            Sigla da UF
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TCodigoItemCarga">
+    <xs:annotation>
+      <xs:documentation>
+        Codigo da mercadoria do ponto de vista da Ferrovia: 1: CONTAINER VAZIO
+        20; 2: CONTAINER VAZIO 40; 3: CONTAINER_CARREGADO 20; 4: CONTAINER
+        CARREGADO 40; 5: CARRETA VAZIA; 6: CARRETA_CARREGADA; 7: PIGGY BACK
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="3"/>
+      <xs:enumeration value="4"/>
+      <xs:enumeration value="5"/>
+      <xs:enumeration value="6"/>
+      <xs:enumeration value="7"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TDocAssoc">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo Documento Associado
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+      <xs:enumeration value="00"/>
+      <xs:enumeration value="01"/>
+      <xs:enumeration value="02"/>
+      <xs:enumeration value="03"/>
+      <xs:enumeration value="04"/>
+      <xs:enumeration value="05"/>
+      <xs:enumeration value="06"/>
+      <xs:enumeration value="07"/>
+      <xs:enumeration value="08"/>
+      <xs:enumeration value="09"/>
+      <xs:enumeration value="10"/>
+      <xs:enumeration value="11"/>
+      <xs:enumeration value="12"/>
+      <xs:enumeration value="99"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

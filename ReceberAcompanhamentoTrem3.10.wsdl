@@ -1,0 +1,73 @@
+<definitions
+     name="ReceberAcompanhamentoTremService"
+     targetNamespace="http://xmlns.mrs.com.br/iti/services/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.mrs.com.br/iti/services/"
+     xmlns:acm="http://xmlns.mrs.com.br/iti/tipos/acompanhamento"
+     xmlns:rtn="http://xmlns.mrs.com.br/iti/tipos/retorno"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:tns0="http://xmlns.mrs.com.br/iti/services/types/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" 
+                targetNamespace="http://xmlns.mrs.com.br/iti/services/types/"
+                attributeFormDefault="unqualified" 
+                elementFormDefault="qualified" 
+                xmlns:tns="http://xmlns.mrs.com.br/iti" 
+                xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/">
+            <import namespace="http://xmlns.mrs.com.br/iti/tipos/acompanhamento" schemaLocation="AcompanhamentoTrem_v3.10.xsd"/>
+            <import namespace="http://xmlns.mrs.com.br/iti/tipos/retorno" schemaLocation="RetornoEnvio_v3.10.xsd"/>
+            <element name="receberAcompanhamentoTremElement">
+                <complexType>
+                    <sequence>
+                        <element name="acompanhamentoTrem" type="acm:TAcompanhamentoTrem" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="receberAcompanhamentoTremResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="retornoEnvio" type="rtn:TRetornoEnvio" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </types>
+    <message name="ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTrem">
+        <part name="parameters" element="tns0:receberAcompanhamentoTremElement"/>
+    </message>
+    <message name="ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTremResponse">
+        <part name="parameters" element="tns0:receberAcompanhamentoTremResponseElement"/>
+    </message>
+    
+    <portType name="ReceberAcompanhamentoTremService">
+        <operation name="receberAcompanhamentoTrem">
+            <input message="tns:ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTrem"/>
+            <output message="tns:ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTremResponse"/>
+        </operation>
+    </portType>
+    <binding name="ReceberAcompanhamentoTremServiceSoapHttp" type="tns:ReceberAcompanhamentoTremService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+       
+        <operation name="receberAcompanhamentoTrem">
+            <soap:operation soapAction="http://xmlns.mrs.com.br/iti/services/receberAcompanhamentoTrem"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        
+    </binding>
+    <service name="ReceberAcompanhamentoTremService">
+        <port name="ReceberAcompanhamentoTremServiceSoapHttpPort" binding="tns:ReceberAcompanhamentoTremServiceSoapHttp">
+            <soap:address location="http://10.1.0.100:8888/GerenciarAcompanhamentoTrem-ITI_ReceberAcompanhamentoTrem-context-root/ReceberAcompanhamentoTremServiceSoapHttpPort"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,106 @@
+﻿<xs:schema targetNamespace="http://xmlns.mrs.com.br/iti/tipos/retorno"
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/retorno"  
+           xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos">
+    <xs:import schemaLocation="TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
+    <xs:element name="RetornoEnvio" type="xi:TRetornoEnvio"/>
+    <xs:complexType name="TRetornoEnvio">
+        <xs:sequence>
+            <xs:element name="CNPJFerrovia" type="xb:TCnpj" maxOccurs="1"
+                        minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numero CNPJ da ferrovia responsavel pela geracao da informacao
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statusEnvio" type="xi:TStatus" maxOccurs="1"
+                        minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        No caso de recebimento com sucesso retornar "OK" e caso
+                        contrario "NOK".
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="protocoloEnvio" type="xs:positiveInteger"/>
+            <xs:choice>
+                <xs:element name="erros">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Erro" nillable="false"
+                                        minOccurs="1" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Erro(s) encontrados na mensagem.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="codigoErro">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Codigo de erro em caso de
+                                                    falha.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xb:TString"/>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="tipoErro"
+                                                    type="xi:TTipoErro"
+                                                    maxOccurs="1" minOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Indica o tipo de erro
+                                                    encontrado com os valores
+                                                    "I" para erro Infraestrutura
+                                                    e "N" para erros de Negocio.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="mensagemErro"
+                                                    minOccurs="1"
+                                                    type="xb:TString">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Mensagem com a descricao do
+                                                    erro encontrado.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="protocoloRecebimento" type="xs:positiveInteger"
+                            nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Identificador unico do recebimento da mensagem
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="versao" type="xb:TVersao" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="TStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="NOK"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TTipoErro">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="I"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
