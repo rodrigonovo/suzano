@@ -20,8 +20,8 @@
                 xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                 xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/">
-            <import namespace="http://xmlns.mrs.com.br/iti/tipos/acompanhamento" schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/AcompanhamentoTrem_v3.10.xsd"/>
-            <import namespace="http://xmlns.mrs.com.br/iti/tipos/retorno" schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/RetornoEnvio_v3.10.xsd"/>
+            <import namespace="http://xmlns.mrs.com.br/iti/tipos/acompanhamento" schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/AcompanhamentoTrem_v3.10.xsd"/>
+            <import namespace="http://xmlns.mrs.com.br/iti/tipos/retorno" schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/RetornoEnvio_v3.10.xsd"/>
             <element name="AcompanhamentoTrem" type="acm:TAcompanhamentoTrem" nillable="true"/>
 			<element name="RetornoEnvio" type="rtn:TRetornoEnvio" nillable="true"/>
         </schema>

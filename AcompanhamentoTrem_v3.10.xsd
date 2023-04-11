@@ -6,8 +6,8 @@
            xmlns:xi="http://xmlns.mrs.com.br/iti/tipos/acompanhamento"
            xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos"
            xmlns:xt="http://xmlns.mrs.com.br/iti/tipos/trem">
-    <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/Trem_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/trem"> </xs:import>
-    <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"> </xs:import>
+    <xs:import schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/Trem_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/trem"> </xs:import>
+    <xs:import schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd" namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"> </xs:import>
     <xs:element name="AcompanhamentoTrem" type="xi:TAcompanhamentoTrem"/>
      <xs:complexType name="TAcompanhamentoTrem">
         <xs:annotation>

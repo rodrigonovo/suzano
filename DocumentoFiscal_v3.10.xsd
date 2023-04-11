@@ -6,9 +6,9 @@
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:xb="http://xmlns.mrs.com.br/iti/tipos/basicos"
            xmlns:xc="http://xmlns.mrs.com.br/iti/tipos/comuns">
-    <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd"
+    <xs:import schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/TiposBasico_v3.10.xsd"
                namespace="http://xmlns.mrs.com.br/iti/tipos/basicos"/>
-    <xs:import schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/TiposComuns_v3.10.xsd"
+    <xs:import schemaLocation="https://raw.githubusercontent.com/rodrigonovo/suzano/main/TiposComuns_v3.10.xsd"
                namespace="http://xmlns.mrs.com.br/iti/tipos/comuns"/>
     <xs:complexType name="TDocumentoFiscal">
         <xs:sequence>
