@@ -22,27 +22,15 @@
                 xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/">
             <import namespace="http://xmlns.mrs.com.br/iti/tipos/acompanhamento" schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/AcompanhamentoTrem_v3.10.xsd"/>
             <import namespace="http://xmlns.mrs.com.br/iti/tipos/retorno" schemaLocation="https://cdn.statically.io/gh/rodrigonovo/suzano/main/RetornoEnvio_v3.10.xsd"/>
-            <element name="receberAcompanhamentoTremElement">
-                <complexType>
-                    <sequence>
-                        <element name="acompanhamentoTrem" type="acm:TAcompanhamentoTrem" nillable="true"/>
-                    </sequence>
-                </complexType>
-            </element>
-            <element name="receberAcompanhamentoTremResponseElement">
-                <complexType>
-                    <sequence>
-                        <element name="retornoEnvio" type="rtn:TRetornoEnvio" nillable="true"/>
-                    </sequence>
-                </complexType>
-            </element>
+            <element name="AcompanhamentoTrem" type="acm:TAcompanhamentoTrem" nillable="true"/>
+			<element name="RetornoEnvio" type="rtn:TRetornoEnvio" nillable="true"/>
         </schema>
     </types>
     <message name="ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTrem">
-        <part name="parameters" element="tns0:receberAcompanhamentoTremElement"/>
+        <part name="parameters" element="tns0:AcompanhamentoTrem"/>
     </message>
     <message name="ReceberAcompanhamentoTremServicePortType_receberAcompanhamentoTremResponse">
-        <part name="parameters" element="tns0:receberAcompanhamentoTremResponseElement"/>
+        <part name="parameters" element="tns0:RetornoEnvio"/>
     </message>
     
     <portType name="ReceberAcompanhamentoTremService">
